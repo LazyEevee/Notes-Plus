@@ -2,7 +2,7 @@ body {
     color:blueviolet;
     margin: 5px;
     padding: 5px;
-    min-width: 400px;
+    width: 500px;
 }
 
 input {
