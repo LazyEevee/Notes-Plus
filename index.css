@@ -7,11 +7,9 @@ body {
 
 input {
     width: 100%;
-    
     padding-top: 5px;
     padding-bottom: 5px;
-    margin-top: 5px;
-    margin-bottom: 5px;
+
     border: 1px solid blueviolet;
 }
 
@@ -20,4 +18,11 @@ button {
     color: white;
     background-color: blueviolet;
     border: 1px solid blueviolet;
+}
+
+#warning {
+    color: white;
+    background: blueviolet;
+    padding: none;
+    margin: none;
 }

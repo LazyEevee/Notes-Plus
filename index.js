@@ -3,8 +3,12 @@ let notes = {}
 // variable for tab to display
 let noteTab = ""
 
+let delBtn = []
+
 // text box
 const textInput = document.getElementById("text-input")
+// warning text
+const warning = document.getElementById("warning")
 // current tab element
 const tabInfo = document.getElementById("tab-info")
 // Save Note button
@@ -24,16 +28,38 @@ const localStorageNotes = JSON.parse(localStorage.getItem("notes"))
 if (localStorageNotes) {
     notes = localStorageNotes
     show(notes)
+    for (i=0; i<Object.keys(notes).length; i++) {
+        delBtn[i] = document.getElementById("Object.keys(notes)[i]")
+    }
 }
+
+document.addEventListener('click', function (event) {
+	if (event.target.matches('.del-btn')) {
+		selected = event.target.id
+        delete notes[selected]
+        localStorage.setItem("notes", JSON.stringify(notes))
+        show(notes)
+    }
+});
 
 // event listener for Save Note button
 saveNote.addEventListener("click", function() {
-    notes[textInput.value] = noteTab
-    textInput.value = ""
-    noteTab = ""
-    tabInfo.textContent = ""
-    localStorage.setItem("notes", JSON.stringify(notes))
-    show(notes)
+    if (textInput.value) {
+        if (!(textInput.value in notes)) {
+            notes[textInput.value] = noteTab
+            textInput.value = ""
+            noteTab = ""
+            tabInfo.textContent = ""
+            warning.textContent = ""
+            localStorage.setItem("notes", JSON.stringify(notes))
+            show(notes)
+        } else {
+            warning.textContent = "Note Already Exists"
+        }
+    } else {
+        warning.textContent = "Note Text Input Needed"
+    }
+    
 })
 
 // event listener for Add Tab button
@@ -41,6 +67,7 @@ addTab.addEventListener("click", function() {
     chrome.tabs.query({active: true, currentWindow: true}, function(tabs){
         noteTab = tabs[0].url
         tabInfo.textContent = noteTab
+        warning.textContent = ""
     })
 })
 
@@ -48,12 +75,14 @@ addTab.addEventListener("click", function() {
 removeTab.addEventListener("click", function() {
     noteTab = ""
     tabInfo.textContent = ""
+    warning.textContent = ""
 })
 
 // event listener for Clear All button
-clearBtn.addEventListener("dblclick", function() {
+clearBtn.addEventListener("click", function() {
     localStorage.clear()
     notes = {}
+    warning.textContent = ""
     show(notes)
 })
 
@@ -67,8 +96,10 @@ function show(notes) {
                 <a href="${Object.values(notes)[i]}" target="_blank">
                     ${Object.values(notes)[i]}
                 </a>
+                <button class="del-btn" id="${Object.keys(notes)[i]}">x</button>
             </li>
         `
     }
     list.innerHTML = items
 }
+
