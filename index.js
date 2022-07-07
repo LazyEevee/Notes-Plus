@@ -11,6 +11,7 @@ const hexRe = /^#[0-9a-f]{6}$/i
 
 const colourInput = document.getElementById("colour-input") 
 const colourBtn = document.getElementById("colour-btn")
+const colourWarn = document.getElementById("colour-warning")
 
 // text box
 const textInput = document.getElementById("text-input")
@@ -61,14 +62,16 @@ colourBtn.addEventListener("click", function() {
         if(hexRe.test(colourInput.value)) {
             currentColour = colourInput.value
             localStorage.setItem("colour", JSON.stringify(currentColour))
+            colourWarn.textContent = ""
             updateColour()
         } else {
-            console.log("please input a 6 digit hex code")
+            colourWarn.textContent = "# 6 digit hex code required"
         }
     })
 
 function updateColour() {
     document.getElementById("colour-btn").style.background = currentColour
+    document.getElementById("colour-warning").style.background = currentColour
     document.getElementById("title").style.color = currentColour
     document.getElementById("warning").style.background = currentColour
     document.getElementById("tab-info").style.color = currentColour
