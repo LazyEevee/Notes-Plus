@@ -1,28 +1,81 @@
 body {
-    color:blueviolet;
+    color:#8a2be2;
     margin: 5px;
     padding: 5px;
     width: 500px;
 }
 
-input {
+header {
+    float: right;
+}
+
+#text-input {
     width: 100%;
     padding-top: 5px;
-    padding-bottom: 5px;
-
-    border: 1px solid blueviolet;
+    padding-bottom: none;
+    margin-bottom: none;
+    border: 1px solid #414141;
 }
 
 button {
-    padding: 5px;
     color: white;
-    background-color: blueviolet;
-    border: 1px solid blueviolet;
+    border: none;
+    background: #8d1a1a;
+    border-radius: 50%;
 }
 
 #warning {
     color: white;
-    background: blueviolet;
-    padding: none;
-    margin: none;
+    background: #8a2be2;
+    padding-top: none;
+    margin-top: none;
+}
+
+#colour-input {
+    font-size: 10px;
+    padding-top: 2px;
+    padding-bottom: 2px;
+    border: 1px solid #414141;
+    width: 50px;
+}
+
+#colour-btn {
+    font-size: 10px;
+    text-align: right;
+    padding-top: 3px;
+    padding-bottom: 3px;
+    background: #8a2be2;
+    border-radius: 0%;
+}
+
+#tab-info {
+    color: #8a2be2
+}
+
+#save-note {
+    background: #8a2be2;
+    border-radius: 0%;
+    padding: 5px;
+}
+
+#add-tab {
+    background: #8a2be2;
+    border-radius: 0%;
+    padding: 5px;
+}
+
+#remove-tab {
+    background: #8a2be2;
+    border-radius: 0%;
+    padding: 5px;
+}
+
+#list {
+    color: #8a2be2;
+}
+
+#clear-btn {
+    background: #8a2be2;
+    border-radius: 0%;
+    padding: 5px;
 }

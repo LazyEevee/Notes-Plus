@@ -5,6 +5,13 @@ let noteTab = ""
 
 let delBtn = []
 
+let currentColour = ""
+
+const hexRe = /^#[0-9a-f]{6}$/i
+
+const colourInput = document.getElementById("colour-input") 
+const colourBtn = document.getElementById("colour-btn")
+
 // text box
 const textInput = document.getElementById("text-input")
 // warning text
@@ -24,6 +31,8 @@ const clearBtn = document.getElementById("clear-btn")
 // Local Storage on browser
 const localStorageNotes = JSON.parse(localStorage.getItem("notes"))
 
+const localStorageColour = JSON.parse(localStorage.getItem("colour"))
+
 // check if anything is in local storage and add to notes object
 if (localStorageNotes) {
     notes = localStorageNotes
@@ -33,6 +42,11 @@ if (localStorageNotes) {
     }
 }
 
+if (localStorageColour) {
+    currentColour = localStorageColour
+    updateColour()
+}
+
 document.addEventListener('click', function (event) {
 	if (event.target.matches('.del-btn')) {
 		selected = event.target.id
@@ -40,7 +54,32 @@ document.addEventListener('click', function (event) {
         localStorage.setItem("notes", JSON.stringify(notes))
         show(notes)
     }
-});
+})
+
+// event listener for Colour Button
+colourBtn.addEventListener("click", function() {
+        if(hexRe.test(colourInput.value)) {
+            currentColour = colourInput.value
+            localStorage.setItem("colour", JSON.stringify(currentColour))
+            updateColour()
+        } else {
+            console.log("please input a 6 digit hex code")
+        }
+    })
+
+function updateColour() {
+    document.getElementById("colour-btn").style.background = currentColour
+    document.getElementById("title").style.color = currentColour
+    document.getElementById("warning").style.background = currentColour
+    document.getElementById("tab-info").style.color = currentColour
+    document.getElementById("save-note").style.background = currentColour
+    document.getElementById("add-tab").style.background = currentColour
+    document.getElementById("remove-tab").style.background = currentColour
+    document.getElementById("list").style.color = currentColour
+    document.getElementById("clear-btn").style.background = currentColour
+    colourInput.value = currentColour
+    console.log(currentColour)
+}
 
 // event listener for Save Note button
 saveNote.addEventListener("click", function() {
